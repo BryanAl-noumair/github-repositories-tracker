@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   color: ${TEXT_COLOR};
   > img {
     width: 75px;
@@ -19,7 +19,7 @@ export const TitleWrapper = styled.div`
 
 export const Data = styled.div`
   color: ${TEXT_COLOR};
-  margin-top: 20px;
+  margin: 20px 0 0 20px;
   font-size: 20px;
   display: flex;
   font-style: italic;
@@ -36,7 +36,7 @@ export const Link = styled.a`
   font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   border: 2px solid ${SECONDARY_LIGHT};
   padding: 5px;
   border-radius: 5px;

@@ -24,6 +24,10 @@ export const fetchRepository = async (
     : [];
 };
 
+export const fetchContributors = async (url: string): Promise<Array<Record<string, any>>> => {
+  return url ? await axios.get(url) : [];
+};
+
 export const parseUrl = (url: string): string => {
   const matches = url.split(GITHUB_QUERY_REPOS);
   return matches.length > 1 ? `/details${matches[1]}` : matches[0];
