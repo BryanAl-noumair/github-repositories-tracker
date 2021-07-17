@@ -7,7 +7,7 @@ import Error from 'common/components/ui/error';
 // Fetch Data and handle loading or error view
 export function useFetchData(
   searchValue: string,
-  renderElement: FC,
+  renderElement: FC<any>,
   fetchFn: (searchValue: string) => Promise<Array<Record<string, any>>>,
   cacheValue: string
 ): Record<string, any> {
@@ -25,9 +25,15 @@ export function useFetchData(
     };
   }
 
-  if (isError || !data) {
+  if (isError) {
     return {
       component: Error
+    };
+  }
+
+  if (data?.length === 0) {
+    return {
+      component: () => null
     };
   }
 

@@ -3,6 +3,14 @@ import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { useDebounce } from 'common/hooks/useDebounce';
 import { Wrapper, Input, Label } from './styles';
 
+type searchBarProps = {
+  initialValue: string;
+  onChangeCb: (term: string) => void;
+  inputId: string;
+  label: string;
+  placeholder: string;
+};
+
 const SearchBar: FC<searchBarProps> = ({
   initialValue,
   onChangeCb,
@@ -25,14 +33,6 @@ const SearchBar: FC<searchBarProps> = ({
       <Input id={inputId} value={searchTerm} onChange={handleOnChange} placeholder={placeholder} />
     </Wrapper>
   );
-};
-
-type searchBarProps = {
-  initialValue: string;
-  onChangeCb: (term: string) => void;
-  inputId: string;
-  label: string;
-  placeholder: string;
 };
 
 export default SearchBar;

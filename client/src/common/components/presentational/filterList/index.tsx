@@ -1,11 +1,27 @@
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 
 import SearchBar from 'common/components/ui/searchBar';
 import InfiniteList from 'common/components/ui/infiniteList';
+import { parseUrl } from 'common/utils';
 import { INPUT_ID, INPUT_LABEL, INPUT_PLACEHOLDER } from './constants';
 
-const FilterList: FC = (): ReactElement => {
+type props = {
+  data: Array<Record<string, any>>;
+};
+
+const FilterList: FC<props> = ({ data }): ReactElement => {
   const [filterValue, setFilterValue] = useState('');
+  const [filteredList, setFiltered] = useState(data);
+
+  useEffect(() => {
+    let currentFilteredList = data;
+    if (filterValue) {
+      currentFilteredList = data.filter((element) =>
+        element?.name.toLowerCase().includes(filterValue)
+      );
+    }
+    setFiltered(currentFilteredList);
+  }, [filterValue]);
 
   return (
     <>
@@ -16,7 +32,7 @@ const FilterList: FC = (): ReactElement => {
         label={INPUT_LABEL}
         placeholder={INPUT_PLACEHOLDER}
       />
-      <InfiniteList />
+      <InfiniteList list={filteredList} parseUrl={parseUrl} />
     </>
   );
 };

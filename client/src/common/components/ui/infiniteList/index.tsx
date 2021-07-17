@@ -1,22 +1,28 @@
 import { FC, ReactElement } from 'react';
 
-import link_png from 'common/icons/link.png';
-import { List, ListItem } from './styles';
+import { useInfiniteList } from 'common/hooks/useInfiniteList';
+import Button from 'common/components/ui/button';
+import ListElement from './components/listElement';
+import { List } from './styles';
 
-const InfiniteList: FC = (): ReactElement => (
-  <List>
-    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 32].map((element) => (
-      <ListItem key={element}>
-        <div>
-          <h3>holaa duicisjdc scnsdocsnd</h3>
-          <p> deddedfdf sf sf sf sjnji</p>
-        </div>
-        <a href="https://www.w3schools.com" target="_blank">
-          <img src={link_png} alt={'link'} />
-        </a>
-      </ListItem>
-    ))}
-  </List>
-);
+type props = {
+  list: Array<Record<string, string>>;
+  parseUrl: (link: string) => string;
+};
+
+const PAGINATION = 10;
+
+const InfiniteList: FC<props> = ({ list, parseUrl }): ReactElement => {
+  const { visibleList, hasMore, handleNext } = useInfiniteList(list, PAGINATION);
+
+  return (
+    <List>
+      {visibleList.map(({ id, name, description, url }) => (
+        <ListElement key={id} name={name} description={description} url={parseUrl(url)} />
+      ))}
+      {hasMore && <Button text={'Next'} onClick={handleNext} />}
+    </List>
+  );
+};
 
 export default InfiniteList;
