@@ -3,6 +3,7 @@ import { FC, ReactElement } from 'react';
 import { useInfiniteList } from 'common/hooks/useInfiniteList';
 import Button from 'common/components/ui/button';
 import ListElement from './components/listElement';
+import { NEXT_BUTTON_TITLE } from './constants';
 import { List } from './styles';
 
 type props = {
@@ -20,7 +21,7 @@ const InfiniteList: FC<props> = ({ list, parseUrl }): ReactElement => {
       {visibleList.map(({ id, name, description, url }) => (
         <ListElement key={id} name={name} description={description} url={parseUrl(url)} />
       ))}
-      {hasMore && <Button text={'Next'} onClick={handleNext} />}
+      {hasMore && <Button text={NEXT_BUTTON_TITLE} onClick={handleNext} />}
     </List>
   );
 };

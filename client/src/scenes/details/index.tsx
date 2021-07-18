@@ -6,6 +6,8 @@ import { useFetchData } from 'common/hooks/useFetchData';
 import InfoDetails from 'common/components/presentational/infoDetails';
 import { fetchRepository } from 'common/utils';
 import { CACHE_REPOSITORY_QUERY } from 'common/constants/text';
+import { trackRepo } from './utils';
+import { BACK_BUTTON_TEXT, TRACK_BUTTON_TEXT } from './constants';
 import { ButtonsWrapper } from './styles';
 
 type params = {
@@ -28,13 +30,16 @@ const Details: FC = (): ReactElement => {
     history.push('/' + organization);
   };
 
+  const repoData = data?.data || {};
+  const handleTrack = () => trackRepo(repoData);
+
   return (
     <>
       <ButtonsWrapper>
-        <Button text={'Back'} onClick={handleBackClick} />
-        <Button text={'Track'} onClick={() => null} />
+        <Button text={BACK_BUTTON_TEXT} onClick={handleBackClick} />
+        <Button text={TRACK_BUTTON_TEXT} onClick={handleTrack} />
       </ButtonsWrapper>
-      <Component data={data?.data || {}} />
+      <Component data={repoData} />
     </>
   );
 };

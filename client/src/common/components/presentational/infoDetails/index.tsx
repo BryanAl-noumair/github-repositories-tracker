@@ -6,6 +6,7 @@ import { useFetchData } from 'common/hooks/useFetchData';
 import { fetchContributors } from 'common/utils';
 import { CACHE_CONTRIBUTORS_QUERY } from 'common/constants/text';
 import ContributorsList from './components/contributorsList';
+import { ISSUES, LANGUAGE, FORKS, STARS, REPOSITORY_LINK } from './constants';
 
 type props = {
   data: Record<string, any>;
@@ -39,31 +40,31 @@ const InfoDetails: FC<props> = ({ data }): ReactElement => {
       </TitleWrapper>
       {language && (
         <Data>
-          <div>Language : </div> {language}
+          <div>{LANGUAGE}</div> {language}
         </Data>
       )}
       {open_issues_count && (
         <Data>
-          <div>Issues : </div>
+          <div>{ISSUES}</div>
           {open_issues_count}
         </Data>
       )}
       {stargazers_count && (
         <Data>
-          <div>Stars : </div>
+          <div>{STARS}</div>
           {stargazers_count}
         </Data>
       )}
       {forks_count && (
         <Data>
-          <div>Forks : </div>
+          <div>{FORKS}</div>
           {forks_count}
         </Data>
       )}
       <Component data={contributors?.data || []} />
       {html_url && (
         <Link href={html_url} target="_blank">
-          <strong>Repository Link: </strong>
+          <strong>{REPOSITORY_LINK}</strong>
           <img src={link_png} alt={'link'} />
         </Link>
       )}

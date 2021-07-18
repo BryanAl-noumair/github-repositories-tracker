@@ -12,10 +12,6 @@ type params = {
   organization: string;
 };
 
-// TODO: check all strings
-// TODO: create readme
-// TODO: review all
-
 const Home: FC = (): ReactElement => {
   const { organization } = useParams<params>();
   const [searchValue, setSearchValue] = useState(organization || '');
